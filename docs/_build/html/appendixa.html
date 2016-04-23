@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Appendix A &mdash; SkyWatch API 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SkyWatch API 0.1 documentation" href="index.html" />
+    <link rel="next" title="Appendix B" href="appendixb.html" />
+    <link rel="prev" title="SkyWatch API Documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="appendix-a">
+<h1>Appendix A<a class="headerlink" href="#appendix-a" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-points-for-portfolios">
+<h2>Data points for portfolios<a class="headerlink" href="#data-points-for-portfolios" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>obs_id</td>
+<td>Observatory name, which is one of MAXI, Fermi, INTEGRAL, SWIFT, MOA, KONUS, ATels, GCN Circulars</td>
+</tr>
+<tr class="row-odd"><td>best_telescopes</td>
+<td>List of names of the 3 best ground based telescopes to view the event</td>
+</tr>
+<tr class="row-even"><td>categories</td>
+<td>List of categories of the events in this portfolio. See <a class="reference internal" href="appendixb.html"><span class="doc">Appendix B</span></a> for a list of categories</td>
+</tr>
+<tr class="row-odd"><td>confirmed</td>
+<td>In the case of a GRB, the portfolio is confirmed when a GCN Circular is issued for the event</td>
+</tr>
+<tr class="row-even"><td>coordinates_from</td>
+<td>Description of the event where the RA and Dec of the portfolio are derived from</td>
+</tr>
+<tr class="row-odd"><td>dec</td>
+<td>The Declination, in decimal degrees, of the events in the portfolio</td>
+</tr>
+<tr class="row-even"><td>description</td>
+<td>Description of the events in the portfolio</td>
+</tr>
+<tr class="row-odd"><td>error</td>
+<td>The error circle, in decimal degrees, of the location of the events in the portfolio</td>
+</tr>
+<tr class="row-even"><td>multiple_events</td>
+<td>An event in the portfolio documents multiple transient events</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Portfolio name</td>
+</tr>
+<tr class="row-even"><td>portfolio_id</td>
+<td>Portfolio ID</td>
+</tr>
+<tr class="row-odd"><td>ra</td>
+<td>The Right Ascension, in decimal degrees, of the events in the portfolio</td>
+</tr>
+<tr class="row-even"><td>redshift</td>
+<td>The redshift of the events in the portfolio</td>
+</tr>
+<tr class="row-odd"><td>redshift_from</td>
+<td>Description of the event where the redshift of the portfolio are derived from</td>
+</tr>
+<tr class="row-even"><td>time_detected</td>
+<td>The UTC date and time that the latest event in the portfolio was detected</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-points-for-events">
+<h2>Data points for events<a class="headerlink" href="#data-points-for-events" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>algorithm</td>
+<td>The index value identifying which location_calculation algorithm was used for this event</td>
+</tr>
+<tr class="row-odd"><td>amplifier</td>
+<td>The amplifier used during the readout</td>
+</tr>
+<tr class="row-even"><td>atel_body</td>
+<td>The body of the Astronomer&#8217;s Telegram (ATel) notice</td>
+</tr>
+<tr class="row-odd"><td>atel_from</td>
+<td>The originator of the ATel</td>
+</tr>
+<tr class="row-even"><td>atel_number</td>
+<td>The number of the ATel</td>
+</tr>
+<tr class="row-odd"><td>atel_object_name</td>
+<td>The name of the object that is the subject of the ATel</td>
+</tr>
+<tr class="row-even"><td>atel_queries</td>
+<td>The authors of the ATel</td>
+</tr>
+<tr class="row-odd"><td>base_mag</td>
+<td>The baseline/quiescent magnitude of the lensed star</td>
+</tr>
+<tr class="row-even"><td>base_mag_uncert</td>
+<td>The error in the baseline/quiescent magnitude value</td>
+</tr>
+<tr class="row-odd"><td>binning_index</td>
+<td>Pixel binning</td>
+</tr>
+<tr class="row-even"><td>bkg_dur</td>
+<td>The duration of the background interval</td>
+</tr>
+<tr class="row-odd"><td>bkg_inten</td>
+<td>The total number of events in the time interval used for the background subtraction of the
+detector_rate_map</td>
+</tr>
+<tr class="row-even"><td>bkg_mean</td>
+<td>The mean value of the background level in the exposure</td>
+</tr>
+<tr class="row-odd"><td>bkg_time</td>
+<td>The starting time of the background interval</td>
+</tr>
+<tr class="row-even"><td>categories</td>
+<td>List of categories of the event. See <span class="xref doc">appendixb.rst</span> for a list of categories</td>
+</tr>
+<tr class="row-odd"><td>centroid_x</td>
+<td>X coordinate of the centroid position</td>
+</tr>
+<tr class="row-even"><td>centroid_y</td>
+<td>Y coordinate of the centroid position</td>
+</tr>
+<tr class="row-odd"><td>circular_body</td>
+<td>The body of a Gamma-ray Coordinates Network (GCN) Circular notice</td>
+</tr>
+<tr class="row-even"><td>circular_from</td>
+<td>The author(s) of the GCN Circular</td>
+</tr>
+<tr class="row-odd"><td>circular_number</td>
+<td>The number of the GCN Circular</td>
+</tr>
+<tr class="row-even"><td>counts</td>
+<td>The minimum number of events needed to calculate a proper centroid</td>
+</tr>
+<tr class="row-odd"><td>cusp_width</td>
+<td>Einstein crossing time</td>
+</tr>
+<tr class="row-even"><td>data_interval</td>
+<td>The interval over which the data were accumulated</td>
+</tr>
+<tr class="row-odd"><td>data_signif</td>
+<td>The significance level of the data in the on-going integrated data</td>
+</tr>
+<tr class="row-even"><td>data_time_scale</td>
+<td>Timesampling of the countrate lightcurve used during the iterative location calculation phase of
+the processing</td>
+</tr>
+<tr class="row-odd"><td>delta_time</td>
+<td>The amount of time between the ra,dec pointing samples</td>
+</tr>
+<tr class="row-even"><td>description</td>
+<td>Description of the event</td>
+</tr>
+<tr class="row-odd"><td>det_thresh</td>
+<td>The detection threshold used in this exposure</td>
+</tr>
+<tr class="row-even"><td>discovery_date</td>
+<td>The detection/declaration date of the event</td>
+</tr>
+<tr class="row-odd"><td>discovery_time</td>
+<td>The detection/declaration time of the event</td>
+</tr>
+<tr class="row-even"><td>e_range_hi_chan_energy</td>
+<td>The energy range of the high energy channel</td>
+</tr>
+<tr class="row-odd"><td>e_range_hi_chan_index</td>
+<td>The energy range of the high energy channel index</td>
+</tr>
+<tr class="row-even"><td>e_range_lo_chan_energy</td>
+<td>The energy range of the low energy channel</td>
+</tr>
+<tr class="row-odd"><td>e_range_lo_chan_index</td>
+<td>The energy range of the low energy channel index</td>
+</tr>
+<tr class="row-even"><td>ecl_coords_lat</td>
+<td>Ecliptic latitude of the spacecraft at the time of the observation</td>
+</tr>
+<tr class="row-odd"><td>ecl_coords_long</td>
+<td>Ecliptic longitude of the spacecraft at the time of the observation</td>
+</tr>
+<tr class="row-even"><td>error_code</td>
+<td>The value for why a position was not found. The values are:  1= no source found in image,
+2= algorithm did not converge, 3= standard deviation too large, and 0xFFF= general error</td>
+</tr>
+<tr class="row-odd"><td>event_date</td>
+<td>The date of the trigger</td>
+</tr>
+<tr class="row-even"><td>event_dec</td>
+<td>The J2000 declination coordinate of the event in degrees</td>
+</tr>
+<tr class="row-odd"><td>event_eband</td>
+<td>The energy band for the successful trigger criteria: 0 - undefined/unavailable,
+1= Low, 2-4 keV, 2= Medium, 4-10 keV, 3= High, 10-20 keV, 4= L+M, 2-10 keV</td>
+</tr>
+<tr class="row-even"><td>event_error</td>
+<td>The radius of the circle that contains most of the event locations</td>
+</tr>
+<tr class="row-odd"><td>event_flux</td>
+<td>The flux (in mCrab units) of the event during the time duration of the successful trigger criterion</td>
+</tr>
+<tr class="row-even"><td>event_id</td>
+<td>The SkyWatch generated id of the event</td>
+</tr>
+<tr class="row-odd"><td>event_id_num</td>
+<td>The numeric id of the event, assigned by the observatory</td>
+</tr>
+<tr class="row-even"><td>event_ra</td>
+<td>The J2000 right ascension coordinate of the event in degrees</td>
+</tr>
+<tr class="row-odd"><td>event_time</td>
+<td>The time of the trigger</td>
+</tr>
+<tr class="row-even"><td>event_tscale</td>
+<td>The timescale index values are: 0= undefined/unavailable, 1= 1 sec, 2= 3 sec, 3= 10 sec, 4= 30 sec,
+5= 1 scan, 6= 1 orbit, 7= 4 orbits, 8= 1 day</td>
+</tr>
+<tr class="row-odd"><td>expo_time</td>
+<td>The nominal exposure time for the image for this event</td>
+</tr>
+<tr class="row-even"><td>exposure_id</td>
+<td>The exposure id in spacecraft seconds</td>
+</tr>
+<tr class="row-odd"><td>filter</td>
+<td>The filter used for the image. Values: 0= Blocked, 1= UV_Grism, 2= UVW2, 3= V, 4= UVM2,
+5= Vis_Grism, 6= UVW1, 7= U, 8= Magnifier, 9= B, 10= White, 11= unknown</td>
+</tr>
+<tr class="row-even"><td>flags</td>
+<td>Two flag bits related to the status of the given burst wrt the Automated Target (AT) and Slewing</td>
+</tr>
+<tr class="row-odd"><td>gain</td>
+<td>The gain of the amplifier used during the readout of the CCD. The value will be 1, 2, 4, 8, or 16.
+If the gain is greater than 1, then the &#8220;object&#8221; in the image is likely due to a cosmic ray, and
+not due to a GRB afterglow</td>
+</tr>
+<tr class="row-even"><td>gal_coords_lat</td>
+<td>Galactic latitude of the spacecraft at the time of the observation</td>
+</tr>
+<tr class="row-odd"><td>gal_coords_long</td>
+<td>Galactic longitude of the spacecraft at the time of the observation</td>
+</tr>
+<tr class="row-even"><td>grb_date</td>
+<td>The date of the event</td>
+</tr>
+<tr class="row-odd"><td>grb_dec</td>
+<td>The Declination, in decimal degrees, of the event</td>
+</tr>
+<tr class="row-even"><td>grb_error</td>
+<td>The error circle, in decimal degrees, of the location of the event</td>
+</tr>
+<tr class="row-odd"><td>grb_inten_burst_inten</td>
+<td>The number of events in the 50-300 keV band averaged over the two closed detectors and
+cosine-corrected</td>
+</tr>
+<tr class="row-even"><td>grb_inten_n_bright_pix</td>
+<td>The number of bright pixels in the image</td>
+</tr>
+<tr class="row-odd"><td>grb_inten_sigma</td>
+<td>The intensity of the burst in sigma units</td>
+</tr>
+<tr class="row-even"><td>grb_mag</td>
+<td>The magnitude of the burst/afterglow</td>
+</tr>
+<tr class="row-odd"><td>grb_name</td>
+<td>The name of the GRB</td>
+</tr>
+<tr class="row-even"><td>grb_phi</td>
+<td>The BAT instrument phi coordinate of the trigger (burst) as determined by the BAT flight software
+program</td>
+</tr>
+<tr class="row-odd"><td>grb_pos_xrt_y</td>
+<td>The GRB x-ray afterglow Y position in XRT coordinates</td>
+</tr>
+<tr class="row-even"><td>grb_pos_xrt_z</td>
+<td>The GRB x-ray afterglow Z position in XRT coordinates</td>
+</tr>
+<tr class="row-odd"><td>grb_ra</td>
+<td>The Right Ascension, in decimal degrees, of the event</td>
+</tr>
+<tr class="row-even"><td>grb_signif</td>
+<td>A measure of the significance of the afterglow detection</td>
+</tr>
+<tr class="row-odd"><td>grb_theta</td>
+<td>The BAT instrument theta coordinate of the trigger (burst) as determined by the BAT flight software
+program</td>
+</tr>
+<tr class="row-even"><td>grb_time</td>
+<td>The time of the event</td>
+</tr>
+<tr class="row-odd"><td>hard_ratio</td>
+<td>The hardness ratio</td>
+</tr>
+<tr class="row-even"><td>height</td>
+<td>The height of the image subarray</td>
+</tr>
+<tr class="row-odd"><td>im_url</td>
+<td>The filename portion of the URL of the image. The leading path for the full URL is
+<a class="reference external" href="http://gcn.gsfc.nasa.gov/gcn/notices_s/">http://gcn.gsfc.nasa.gov/gcn/notices_s/</a></td>
+</tr>
+<tr class="row-even"><td>image_signif</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>image_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>img_start_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>img_start_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>inst_modes_uvot</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>inst_modes_xrt</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>integ_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>lc_live_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>lc_start_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>lc_start_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>lc_stop_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>lc_stop_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>lc_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>lead_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>livetime</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>loc_algorithm</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>loc_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>lrpd_bias</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>mag_limit</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>magnitude</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>max_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>max_mag</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>max_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>max_uncert</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>merit</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>merit_params</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>mode</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>moon_dist</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>moon_illum</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>moon_postn_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>moon_postn_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>most_likely_index</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>most_likely_prob</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>n_bins</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>n_stars</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>notice_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>notice_type</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>notice_type_description</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>obs_id</td>
+<td>Observatory name - one of MAXI, Fermi, INTEGRAL, SWIFT, MOA, KONUS, ATels, GCN Circulars</td>
+</tr>
+<tr class="row-odd"><td>obs_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>ph2_iter</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>photo_thresh</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>point_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>point_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>point_roll</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>portfolio_id</td>
+<td>Portfolio ID of the portfolio that contains this event</td>
+</tr>
+<tr class="row-even"><td>rate_signif</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>record_num</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>redshift</td>
+<td>The redshift of the event</td>
+</tr>
+<tr class="row-odd"><td>region_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>region_error</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>region_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>region_source</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>roll</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>sc_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>sc_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>second_most_likely_index</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>second_most_likely_prob</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>sl_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>slew_query</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>soln_status</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>sourcexml</td>
+<td>The raw VOEvent XML of the event that SkyWatch received</td>
+</tr>
+<tr class="row-even"><td>spec_start_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>spec_start_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>spec_stop_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>spec_stop_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>spec_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>src_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>src_id_num</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>src_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>std_dev</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>sun_angle</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>sun_dist</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>sun_postn_dec</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>sun_postn_ra</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>tam0_x_tam_1</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>tam1_y_tam_1</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>tam2_x_tam_2</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>tam3_y_tam_2</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>term_cond</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>time_detected</td>
+<td>The UTC date and time that the event was detected.</td>
+</tr>
+<tr class="row-odd"><td>tp_expo_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>tp_start_date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>tp_start_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>tp_url</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>trigger_dur</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>trigger_index</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>trigger_num</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>trigger_signif</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>u0</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>u0_uncert</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>wait_time</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>waveform</td>
+<td>The waveform number of the readout</td>
+</tr>
+<tr class="row-odd"><td>width</td>
+<td>The width of the image subarray</td>
+</tr>
+<tr class="row-even"><td>x_grb_pos</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>x_max</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>x_offset</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>xrt_thresholded_pixels</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>y_grb_pos</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>y_max</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>y_offset</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Appendix A</a><ul>
+<li><a class="reference internal" href="#data-points-for-portfolios">Data points for portfolios</a></li>
+<li><a class="reference internal" href="#data-points-for-events">Data points for events</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">SkyWatch API Documentation</a></li>
+      <li>Next: <a href="appendixb.html" title="next chapter">Appendix B</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, The SkyWatch Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

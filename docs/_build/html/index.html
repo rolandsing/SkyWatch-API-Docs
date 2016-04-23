@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SkyWatch API Documentation &mdash; SkyWatch API 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SkyWatch API 0.1 documentation" href="#" />
+    <link rel="next" title="Appendix A" href="appendixa.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skywatch-api-documentation">
+<h1>SkyWatch API Documentation<a class="headerlink" href="#skywatch-api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The SkyWatch API is a RESTful interface to the astronomy data collected for display in the <a class="reference external" href="https://app.skywatch.co/">SkyWatch App</a>.
+Main sources of the data include the Gamma Ray Coordinates Network and The Astronomer&#8217;s Telegram.</p>
+<div class="section" id="how-the-data-is-organized">
+<h2>How the data is organized<a class="headerlink" href="#how-the-data-is-organized" title="Permalink to this headline">¶</a></h2>
+<p>When a Gamma Ray Burst, Supernova or other transient occurrence is detected in the night sky, SkyWatch is notified through what we  call
+an <strong>Event</strong>. Because there are many space and ground based telescopes (called <strong>Observatories</strong>) on the network, we typically get
+several event notifications for the same event. Event notifications for same event are grouped together in what we call a <strong>Portfolio</strong>.
+This distinction is important when searching for information for a specific event.</p>
+<p>Simply finding the portfolio containing the event may be enough for your purposes. Information like location (Right Ascension and Declination
+in Decimal Degrees), location error, redshift, the detection time of the latest event, the observatories that have observed the event and
+the category of the event (Supernova, GRB, etc) is stored at the portfolio level. The portfolio is identified by a 12 byte alphanumeric
+string called the <em>portfolio_id</em>. Once the portfolio_id is determined, you can use that to find a specific event in that portfolio. Events
+in a portfolio can be queried by the time detected or the category. Each event is uniquely identified by a 16 byte alphanumeric string
+called the <em>event_id</em>.</p>
+</div>
+<div class="section" id="the-data-returned">
+<h2>The data returned<a class="headerlink" href="#the-data-returned" title="Permalink to this headline">¶</a></h2>
+<p>All data is returned in JSON format, as a list of dictionaries. If your query returns no events or portfolios, an empty list is returned.
+Each dictionary contains all of the non-null or non-zero data points that we have for that event or portfolio. A description of the data
+points returned appears in <a class="reference internal" href="appendixa.html"><span class="doc">Appendix A</span></a>. If the request ends in error, HTML containing the HTTP status code is returned.</p>
+</div>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>You must be a registered user on the SkyWatch App to use the API. You must specify your email address and password in the auth header of
+the request. The API is served using SSL only, so the credentials are never passed in the clear.</p>
+</div>
+<div class="section" id="api-entry-points">
+<h2>API entry points<a class="headerlink" href="#api-entry-points" title="Permalink to this headline">¶</a></h2>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/id/&lt;portfolio_id&gt;/</strong></p>
+<p>Retrieve all of the non-null and non-zero data points for the specified &lt;portfolio_id&gt;. The potential data points returned are
+listed in <a class="reference internal" href="appendixa.html"><span class="doc">Appendix A</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/date/&lt;from_date&gt;/&lt;to_date&gt;/</strong></p>
+<p>Retrieve all of the portfolios where the latest event occurred from 00:00:00.000 UTC of the &lt;from_date&gt; to 23:59:59.999 UTC of the
+&lt;to_date&gt;. Dates must be specified in the YYYY-MM-DD format.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/category/&lt;category_name&gt;/</strong></p>
+<p>Retrieve all of the portfolios containing events of &lt;category_name&gt;. Category names are listed in <a class="reference internal" href="appendixb.html"><span class="doc">Appendix B</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/observatory/&lt;observatory_name&gt;/</strong></p>
+<p>Retrieve all of the portfolios containing events of observed at &lt;observatory_name&gt;. Observatory names are one of MAXI, Fermi, INTEGRAL,
+SWIFT, MOA, KONUS, ATels, GCN Circulars.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/location/&lt;ra&gt;/&lt;dec&gt;/&lt;error&gt;/</strong></p>
+<p>Retrieve all of the portfolios containing events observed near &lt;ra&gt;, &lt;dec&gt; within error circle &lt;error&gt;. If &lt;error&gt; is not specified,
+it defaults to 0.1 degrees. &lt;ra&gt;, &lt;dec&gt; and &lt;error&gt; can only be specified in decimal degrees. Sexagesimal values are not accepted.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/nearby/&lt;portfolio_id&gt;/</strong></p>
+<p>Retrieve some of the data points from the SIMBAD database for the 10 closest known objects to the events in the portfolio specified by
+&lt;portfolio_id&gt;. The potential data points returned are listed in <a class="reference internal" href="appendixc.html"><span class="doc">Appendix C</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/portfolios/telescopes/&lt;portfolio_id&gt;/</strong></p>
+<p>Retrieve the data points for the three best telescopes to observe the events in the portfolio specified by &lt;portfolio_id&gt;. The potential
+data points returned are listed in <a class="reference internal" href="appendixc.html"><span class="doc">Appendix C</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/events/id/&lt;event_id&gt;/</strong></p>
+<p>Retrieve all of the non-null and non-zero data points for the event specified by &lt;event_id&gt;. The potential data points returned are
+listed in <a class="reference internal" href="appendixb.html"><span class="doc">Appendix B</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/events/portfolio/&lt;portfolio_id&gt;/</strong></p>
+<p>Retrieve all of the events in the portfolio specified by &lt;portfolio_id&gt;.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/events/portfolio/&lt;portfolio_id&gt;/category/&lt;category_name&gt;/</strong></p>
+<p>Retrieve all of the events in the portfolio specified by &lt;portfolio_id&gt; containing events of &lt;category_name&gt;. Category names are listed
+in <a class="reference internal" href="appendixb.html"><span class="doc">Appendix B</span></a>.</p>
+<p><strong>https://api-public.skywatch.co/v0.1/events/portfolio/&lt;portfolio_id&gt;/date/&lt;from_date&gt;/&lt;to_date&gt;/</strong></p>
+<p>Retrieve all of the events in the portfolio specified by &lt;portfolio_id&gt; containing events where the latest event occurred from
+00:00:00.000 UTC of the &lt;from_date&gt; to 23:59:59.999 UTC of the &lt;to_date&gt;. Dates must be specified in the YYYY-MM-DD format.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<p>Return the portfolio information for portfolio WS2WRDINQ7JK</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api-public.skywatch.co/v0.1/&#39;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;portfolios/id/WS2WRDINQ7JK/&#39;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span> <span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="n">query</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;roland@skywatch.co&#39;</span><span class="p">,</span> <span class="s1">&#39;XXXXXXXX&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="appendicies">
+<h1>Appendicies<a class="headerlink" href="#appendicies" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendixa.html">Appendix A</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendixa.html#data-points-for-portfolios">Data points for portfolios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendixa.html#data-points-for-events">Data points for events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendixb.html">Appendix B</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendixb.html#portfolio-categories">Portfolio Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendixb.html#event-categories-mostly-for-atels">Event Categories (mostly for ATels)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendixc.html">Appendix C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendixc.html#data-points-for-nearby-sources">Data points for nearby sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendixc.html#data-points-for-telescopes">Data points for telescopes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SkyWatch API Documentation</a><ul>
+<li><a class="reference internal" href="#how-the-data-is-organized">How the data is organized</a></li>
+<li><a class="reference internal" href="#the-data-returned">The data returned</a></li>
+<li><a class="reference internal" href="#authentication">Authentication</a></li>
+<li><a class="reference internal" href="#api-entry-points">API entry points</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#appendicies">Appendicies</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="appendixa.html" title="next chapter">Appendix A</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, The SkyWatch Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
