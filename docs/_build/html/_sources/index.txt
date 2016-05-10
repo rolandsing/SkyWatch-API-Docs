@@ -89,22 +89,109 @@ Example
 
 Return the portfolio information for portfolio WS2WRDINQ7JK
 
+Python:
+
 .. code-block:: python
 
-	import requests
-	import pprint
-	
-	def main():
-	    url = 'https://api-public.skywatch.co/v0.1/'
-	    query = 'portfolios/id/WS2WRDINQ7JK/'
-	    headers = { 'Accept': 'application/json' }
-	    r = requests.get(url+query, headers=headers, auth=('roland@skywatch.co', 'XXXXXXXX'))
-	    if r.status_code < 300:
-	        pprint.pprint(r.json())
-	
-	if __name__ == '__main__':
-	    main()
-	    
+    import requests
+    import pprint
+    
+    def main():
+        url = 'https://api-public.skywatch.co/v0.1/'
+        query = 'portfolios/id/WS2WRDINQ7JK/'
+        headers = { 'Accept': 'application/json' }
+        r = requests.get(url+query, headers=headers, auth=('roland@skywatch.co', 'XXXXXXXX'))
+        if r.status_code < 300:
+            pprint.pprint(r.json())
+    
+    if __name__ == '__main__':
+        main()
+
+Java:        
+
+.. code-block:: java
+
+    package co.skywatch.public_api.java_client;
+    
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
+    import java.util.Base64;
+    
+    import org.apache.http.client.methods.CloseableHttpResponse;
+    import org.apache.http.client.methods.HttpGet;
+    import org.apache.http.impl.client.CloseableHttpClient;
+    import org.apache.http.impl.client.HttpClients;
+    import org.apache.log4j.Logger;
+    import org.json.JSONArray;
+    import org.json.JSONException;
+    import org.json.JSONObject;
+    
+    public class SkyWatchAPI {
+    
+        private static Logger log = Logger.getLogger(SkyWatchAPI.class);
+    
+        public boolean callAPI() {
+            
+            boolean success = true;
+            try {
+                CloseableHttpClient httpclient = HttpClients.createDefault();
+    
+                String credentials = "roland@skywatch.co:XXXXXXXX";
+                String encoded = Base64.getEncoder().encodeToString(credentials.getBytes());
+    
+                String url = "https://api-public.skywatch.co/v0.1/";
+                String query = "portfolios/id/WS2WRDINQ7JK/";
+    
+                HttpGet httpGet = new HttpGet(url+query);
+                
+                httpGet.addHeader("Accept" , "application/json");
+                httpGet.addHeader("Authorization", "Basic " + encoded);
+                
+                StringBuilder outputBuilder = new StringBuilder();
+                try {
+                    CloseableHttpResponse response = httpclient.execute(httpGet);
+                    int status = response.getStatusLine().getStatusCode();
+                    if (status < 200 || status >= 300) {
+                        log.error("SkyWatch API call failed:  " + status);                    
+                        success = false;
+                    } else {
+                        BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+                        String line = "";
+                        while ((line = rd.readLine()) != null) {
+                            outputBuilder.append(line);    
+                        }
+                    }
+                    response.close();
+                } catch (IOException e) {
+                    log.error("Exception calling SkyWatch API:  ", e);
+                    success = false;
+                } finally {
+                    httpclient.close();
+                }
+                
+                try {
+                    final JSONArray astroData = new JSONArray(outputBuilder.toString());
+                    final int n = astroData.length();
+                    for (int i = 0; i < n; ++i) {
+                      final JSONObject event = astroData.getJSONObject(i);
+                      log.debug("Event name is:  " + event.getString("name"));
+                    }
+                } catch (JSONException  e) {
+                    log.error("Exception parsing SkyWatch API output:  ", e);
+                    success = false;
+                }
+            } catch (IOException e) {
+                log.error("Exception connecting to SkyWatch API:  ", e);
+                success = false;
+            }
+            
+            return success;
+        }
+        
+    }
+
+
 Appendicies
 ===========
 .. toctree::
