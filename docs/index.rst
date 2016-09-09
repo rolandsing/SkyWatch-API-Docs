@@ -1,6 +1,6 @@
-SkyWatch API Documentation
-==========================
-The SkyWatch API is a RESTful interface to the astronomy data collected for display in the `SkyWatch App <https://app.skywatch.co/>`_.
+SkyWatch Supernova API Documentation
+====================================
+The SkyWatch Supernova API is a RESTful interface to the astronomy data collected for display in the `Supernova App <https://supernova.skywatch.co/>`_.
 Main sources of the data include the Gamma Ray Coordinates Network and The Astronomer's Telegram.
 
 How the data is organized
